@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
     xmlns:local="using:WebScraperCars" 
-    xmlns:local1="using:WebScraperCars.ViewModels" xmlns:models="using:WebScraperCars.Models"
+    xmlns:local1="using:WebScraperCars.ViewModels" 
+    xmlns:models="using:WebScraperCars.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
