@@ -18,13 +18,44 @@
 
     <Page.Resources>
         <DataTemplate x:DataType="models:CarModel" x:Key="BookDataTemplate">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Image Name="image" Source="{x:Bind CarImage}" HorizontalAlignment="Left" MaxHeight="200" MaxWidth="200"/>
-                <StackPanel Margin="20, 20, 0, 0">
-                    <TextBlock Text="{x:Bind CarID}" HorizontalAlignment="Left" FontSize="20"/>
-                    <TextBlock Text="{x:Bind CarName}" HorizontalAlignment="Left" FontSize="10"/>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    
+                    <Image Name="image" Source="{x:Bind CarImage}" HorizontalAlignment="Left" MaxHeight="200" MaxWidth="200"/>
+                    
+                    <StackPanel Margin="20, 0, 0, 0" HorizontalAlignment="Left">
+
+                        <TextBlock  HorizontalAlignment="Left" FontSize="30">
+                        <Run Text="{x:Bind CarName}"/>
+                        </TextBlock>
+
+                        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="0, 5, 0, 0">
+                        <Run Text="ID: " />
+                        <Run Text="{x:Bind CarID}" />
+                        </TextBlock>
+
+                        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="0, 5, 0, 0">
+                        <Run Text="Site: " />
+                        <Run Text="{x:Bind CarCountry}" />
+                        </TextBlock>
+
+                        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="0, 5, 0, 0">
+                        <Run Text="{x:Bind CarCountry}" />
+                        </TextBlock>
+
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    
+                    <TextBlock FontSize="15" Margin="0, 0, 10, 10">
+                        <Run Text="{x:Bind CarPrice}"/>
+                        <Run Text="€" />
+                    </TextBlock>
+                    
+                </StackPanel>
+
+            </Grid>
         </DataTemplate>
     </Page.Resources>
     
@@ -47,6 +78,12 @@
                       IsItemClickEnabled="True"  
                       ItemTemplate="{StaticResource BookDataTemplate}"                      
                       FlowDirection="LeftToRight">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 
             </ListView>
 
