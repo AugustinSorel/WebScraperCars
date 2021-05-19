@@ -36,7 +36,7 @@
 
                         <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="0, 5, 0, 0">
                         <Run Text="Site: " />
-                        <Run Text="{x:Bind CarCountry}" />
+                        <Run Text="{x:Bind CarSite}" />
                         </TextBlock>
 
                         <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="0, 5, 0, 0">
@@ -107,6 +107,7 @@
                                    Margin="10"/>
 
                     <CheckBox Content="Le Parking"
+                              IsChecked="True"
                               FontSize="20"/>
 
                     <CheckBox Content="Le Bon Coin"
@@ -150,6 +151,16 @@
                 >
 
             <SymbolIcon Symbol="Play"/>
+
+        </Button>
+
+        <Button Grid.Row="2" 
+                HorizontalAlignment="Right"
+                FontSize="50"
+                Style="{ThemeResource ButtonRevealStyle}"
+                >
+
+            <SymbolIcon Symbol="Globe"/>
 
         </Button>
 
