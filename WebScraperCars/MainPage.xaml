@@ -4,11 +4,104 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WebScraperCars"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Key="ImageTextTemplate">
+            
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Display the cars -->
+        <Grid>
+
+            <GridView x:Name="ContentGridView"
+                      
+                      ItemTemplate="{StaticResource ImageTextTemplate}"
+                      IsItemClickEnabled="False"
+                      CanDragItems="False"
+                      AllowDrop="False"
+                      CanReorderItems="False"
+                      SelectionMode="Single"
+                      
+                      
+                      FlowDirection="LeftToRight"/>
+
+
+        </Grid>
+
+        <!-- Display the settings -->
+        <StackPanel Grid.Row="1">
+            
+            <controls:Expander x:Name="de" 
+                               Margin="10"
+                               Header="Filters"
+                               IsExpanded="False"
+                               ExpandDirection="Up">
+
+                <StackPanel>
+
+                    <TextBlock Text="Which Website: "
+                                   HorizontalAlignment="Center"
+                                   FontSize="20"
+                                   Margin="10"/>
+
+                    <CheckBox Content="Le Parking"
+                              FontSize="20"/>
+
+                    <CheckBox Content="Le Bon Coin"
+                              FontSize="20"/>
+
+                    <CheckBox Content="La central"
+                              FontSize="20"/>
+
+                </StackPanel>
+
+            </controls:Expander>
+
+            <controls:Expander x:Name="Expander2" 
+                               Margin="10"
+                               Header="Search Detail"
+                               IsExpanded="False"
+                               ExpandDirection="Up">
+
+                    <StackPanel>
+                        
+                        <TextBlock Text="What are you looking for?: "
+                                   HorizontalAlignment="Center"
+                                   FontSize="20"
+                                   Margin="10"/>
+                        
+                        <TextBox Margin="10"
+                                 PlaceholderText="Car Name"
+                                 TextAlignment="Center"
+                                 FontSize="20"/>
+                        
+                    </StackPanel>
+                
+            </controls:Expander>
+        </StackPanel>
+
+        <!-- Display the Start Button -->
+        <Button Grid.Row="2" 
+                HorizontalAlignment="Center"
+                FontSize="50"
+                Style="{ThemeResource ButtonRevealStyle}"
+                >
+
+            <SymbolIcon Symbol="Play"/>
+
+        </Button>
 
     </Grid>
 </Page>
