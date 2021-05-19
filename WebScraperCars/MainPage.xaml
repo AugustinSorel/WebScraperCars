@@ -39,7 +39,7 @@
         <Grid>
 
             <ListView x:Name="ContentGridView"
-                      ItemsSource="{Binding carModels}"
+                      ItemsSource="{Binding CarModels}"
                       CanDragItems="False"
                       AllowDrop="False"
                       CanReorderItems="False"
