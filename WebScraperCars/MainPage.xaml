@@ -9,6 +9,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.DataContext>
+        <local:ViewModelBase/>
+    </Page.DataContext>
+    
     <Page.Resources>
         <DataTemplate x:Key="ImageTextTemplate">
             
@@ -26,7 +30,7 @@
         <Grid>
 
             <GridView x:Name="ContentGridView"
-                      
+                      ItemsSource="{x:Bind Items}"
                       ItemTemplate="{StaticResource ImageTextTemplate}"
                       IsItemClickEnabled="False"
                       CanDragItems="False"
