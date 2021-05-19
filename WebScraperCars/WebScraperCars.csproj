@@ -139,6 +139,8 @@
     <Content Include="Assets\AddBuildToQueue_16x.png" />
     <Content Include="Assets\AddDimension_16x.png" />
     <Content Include="Assets\audi-r8-.jpg" />
+    <Content Include="Assets\Audi2.jpg" />
+    <Content Include="Assets\BMW.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

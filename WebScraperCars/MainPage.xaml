@@ -17,12 +17,12 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <DataTemplate x:DataType="models:Books" x:Key="BookDataTemplate">
+        <DataTemplate x:DataType="models:CarModel" x:Key="BookDataTemplate">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Image Name="image" Source="{x:Bind CoverImage}" HorizontalAlignment="Left"/>
+                <Image Name="image" Source="{x:Bind CarImage}" HorizontalAlignment="Left" MaxHeight="200" MaxWidth="200"/>
                 <StackPanel Margin="20, 20, 0, 0">
-                    <TextBlock Text="{x:Bind Title}" HorizontalAlignment="Left" FontSize="20"/>
-                    <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Left" FontSize="10"/>
+                    <TextBlock Text="{x:Bind CarID}" HorizontalAlignment="Left" FontSize="20"/>
+                    <TextBlock Text="{x:Bind CarName}" HorizontalAlignment="Left" FontSize="10"/>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -39,7 +39,7 @@
         <Grid>
 
             <ListView x:Name="ContentGridView"
-                      ItemsSource="{Binding Books}"
+                      ItemsSource="{Binding carModels}"
                       CanDragItems="False"
                       AllowDrop="False"
                       CanReorderItems="False"

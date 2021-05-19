@@ -2,7 +2,7 @@
 
 namespace WebScraperCars
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    class ViewModelBase : INotifyPropertyChanged
     {
         #region Property Changed Event Handler 
         public event PropertyChangedEventHandler PropertyChanged;
