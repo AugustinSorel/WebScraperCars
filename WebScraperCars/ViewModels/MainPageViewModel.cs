@@ -1,11 +1,11 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WebScraperCars.Models;
+using Windows.UI.Xaml;
 
 namespace WebScraperCars.ViewModels
 {
@@ -15,8 +15,19 @@ namespace WebScraperCars.ViewModels
         public StartScrapingCommand ButtonScrapingCommand { get; set; }
 
         private bool isLeParkingChecked;
+        private Visibility isVisible;
 
         #region Properties
+        public Visibility IsVisible
+        {
+            get { return isVisible; }
+            set 
+            { 
+                isVisible = value; 
+                NotifyPropertyChanged("IsVisible"); 
+            }
+        }
+
         public ObservableCollection<CarModel> CarModelsItemSource
         {
             get { return carModelsItemSource; }
@@ -36,11 +47,11 @@ namespace WebScraperCars.ViewModels
                 NotifyPropertyChanged("IsLeParkingChecked");
             }
         }
-
         #endregion
 
         public MainPageViewModel()
         {
+            IsVisible = Visibility.Collapsed;
             ButtonScrapingCommand = new StartScrapingCommand(StartScraping);
         }
 
@@ -52,6 +63,8 @@ namespace WebScraperCars.ViewModels
 
         private async void StartPopulatingTheListView(string carName)
         {
+            IsVisible = Visibility.Visible;
+
             ObservableCollection<CarModel> cars = new ObservableCollection<CarModel>();
 
             if (isLeParkingChecked)
@@ -64,6 +77,8 @@ namespace WebScraperCars.ViewModels
 
 
             CarModelsItemSource = cars;
+
+            IsVisible = Visibility.Collapsed;
         }
 
         public bool UserSelectedAtLeastOneCheckBox()

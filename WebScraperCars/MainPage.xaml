@@ -53,6 +53,8 @@
                         <Run Text="{x:Bind CarPrice}"/>
                     </TextBlock>
 
+                    <HyperlinkButton Content="Website" NavigateUri="{x:Bind URL}"/>
+
                 </StackPanel>
 
             </Grid>
@@ -81,11 +83,14 @@
 
             </TextBlock>
 
+            <ProgressRing Visibility="{Binding IsVisible, UpdateSourceTrigger=PropertyChanged}" 
+                          IsActive="True"
+                          Width="200"
+                          Height="200"/>
+
+
             <ListView x:Name="ContentListView"
                       ItemsSource="{Binding CarModelsItemSource}"
-                      CanDragItems="False"
-                      AllowDrop="False"
-                      CanReorderItems="False"
                       SelectionMode="Single"
                       IsItemClickEnabled="True"  
                       ItemTemplate="{StaticResource CarListDataTemplate}"                      
@@ -163,16 +168,6 @@
                 >
 
             <SymbolIcon Symbol="Play"/>
-
-        </Button>
-
-        <Button Grid.Row="2" 
-                HorizontalAlignment="Right"
-                FontSize="50"
-                Style="{ThemeResource ButtonRevealStyle}"
-                >
-
-            <SymbolIcon Symbol="Globe"/>
 
         </Button>
 
