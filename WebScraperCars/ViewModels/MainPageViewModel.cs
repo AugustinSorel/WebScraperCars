@@ -5,8 +5,19 @@ namespace WebScraperCars.ViewModels
 {
     class MainPageViewModel : ViewModelBase
     {
-        public ObservableCollection<CarModel> CarModels { get; set; }
-        
+        private ObservableCollection<CarModel> carModels;
+
+        public ObservableCollection<CarModel> CarModels
+        {
+            get { return carModels; }
+            set 
+            { 
+                carModels = value;
+                NotifyPropertyChanged("CarModels");
+            }
+        }
+
+
         public MainPageViewModel()
         {
             CarModels = CarManager.GetCars();

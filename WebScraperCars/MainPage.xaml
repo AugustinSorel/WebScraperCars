@@ -7,7 +7,8 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
     xmlns:local="using:WebScraperCars" 
     xmlns:local1="using:WebScraperCars.ViewModels" 
-    xmlns:models="using:WebScraperCars.Models"
+    xmlns:models="using:WebScraperCars.Models" 
+    xmlns:converters="using:WebScraperCars.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -57,6 +58,9 @@
 
             </Grid>
         </DataTemplate>
+
+        <converters:ListViewItemConverter x:Key="ListViewItemVisibilityConverter"/>
+
     </Page.Resources>
     
     <Grid>
@@ -68,6 +72,15 @@
 
         <!-- Display the cars -->
         <Grid>
+
+            <TextBlock Visibility="{Binding CarModels.Count,
+                                            Converter={StaticResource ListViewItemVisibilityConverter}}"
+                       HorizontalAlignment="Center"
+                       Margin="10">
+
+                <Run Text="No Items" FontSize="40"/>
+
+            </TextBlock>
 
             <ListView x:Name="ContentGridView"
                       ItemsSource="{Binding CarModels}"
