@@ -52,7 +52,7 @@
                     <TextBlock FontSize="15" Margin="0, 0, 10, 10">
                         <Run Text="{x:Bind CarPrice}"/>
                     </TextBlock>
-                    
+
                 </StackPanel>
 
             </Grid>

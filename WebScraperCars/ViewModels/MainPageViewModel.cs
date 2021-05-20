@@ -94,12 +94,19 @@ namespace WebScraperCars.ViewModels
                     CarName = GetTitle(productListItem),
                     CarPrice = GetPrice(productListItem),
                     CarSite = "Le Parking",
-                    URL = "NO",
+                    URL = GetURL(productListItem),
                     CarImage = GetImage(productListItem),
                 });
             }
 
             return carModels;
+        }
+
+        private string GetURL(HtmlNode productListItem)
+        {
+            string x = productListItem.Descendants("a").Where(node => node.GetAttributeValue("class", "").Equals("external btn-plus no-partenaire-btn")).FirstOrDefault().GetAttributeValue("href", "");
+            string url = "https://www.leparking.fr" + x;
+            return url;
         }
 
         private string GetImage(HtmlNode productListItem)
