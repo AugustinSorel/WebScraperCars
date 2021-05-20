@@ -147,6 +147,7 @@
                                    Margin="10"/>
                         
                         <TextBox Margin="10"
+                                 x:Name="textBoxCarName"
                                  PlaceholderText="Car Name"
                                  TextAlignment="Center"
                                  FontSize="20"/>
@@ -160,6 +161,8 @@
         <Button Grid.Row="2" 
                 HorizontalAlignment="Center"
                 FontSize="50"
+                Command="{Binding ButtonScrapingCommand}"
+                CommandParameter="{Binding ElementName=textBoxCarName, Path=Text}"
                 Style="{ThemeResource ButtonRevealStyle}"
                 >
 
