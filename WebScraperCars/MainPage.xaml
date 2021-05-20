@@ -108,7 +108,7 @@
             <controls:Expander x:Name="de" 
                                Margin="10"
                                Header="Filters"
-                               IsExpanded="False"
+                               IsExpanded="True"
                                ExpandDirection="Up">
 
                 <StackPanel>
@@ -119,16 +119,13 @@
                                    Margin="10"/>
 
                     <CheckBox Content="Le Parking"
-                              IsChecked="True"
-                              FontSize="20"/>
-
-                    <CheckBox Content="Le Bon Coin"
-                              FontSize="20"/>
-
-                    <CheckBox Content="La central"
+                              IsChecked="{Binding IsLeParkingChecked, 
+                                                  Mode=TwoWay, 
+                                                  UpdateSourceTrigger=PropertyChanged}"
                               FontSize="20"/>
 
                 </StackPanel>
+
 
             </controls:Expander>
 

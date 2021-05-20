@@ -1,8 +1,6 @@
 ﻿using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,6 +13,9 @@ namespace WebScraperCars.ViewModels
         private ObservableCollection<CarModel> carModelsItemSource;
         public StartScrapingCommand ButtonScrapingCommand { get; set; }
 
+        private bool isLeParkingChecked;
+
+        #region Properties
         public ObservableCollection<CarModel> CarModelsItemSource
         {
             get { return carModelsItemSource; }
@@ -25,6 +26,17 @@ namespace WebScraperCars.ViewModels
             }
         }
 
+        public bool IsLeParkingChecked
+        {
+            get { return isLeParkingChecked; }
+            set 
+            { 
+                isLeParkingChecked = value;
+                NotifyPropertyChanged("IsLeParkingChecked");
+            }
+        }
+        #endregion
+
         public MainPageViewModel()
         {
             ButtonScrapingCommand = new StartScrapingCommand(StartScraping);
@@ -32,9 +44,19 @@ namespace WebScraperCars.ViewModels
 
         public async void StartScraping(object carName)
         {
-            CarModelsItemSource = await GetCars(carName as string);
+            if (UserSelectedAtLeastOneCheckBox())
+                CarModelsItemSource = await GetCars(carName as string);
         }
 
+        public bool UserSelectedAtLeastOneCheckBox()
+        {
+            if (isLeParkingChecked)
+                return true;
+
+            return false;
+        }
+
+        #region Le Parking Scraping
         private async Task<ObservableCollection<CarModel>> GetCars(string v)
         {
             var url = "https://www.leparking.fr/voiture-occasion/" + v + ".html";
@@ -96,5 +118,6 @@ namespace WebScraperCars.ViewModels
         {
             return productHTML[0].Descendants("li").Where(node => node.GetAttributeValue("class", "").Contains("clearfix")).ToList();
         }
+        #endregion
     }
 }
