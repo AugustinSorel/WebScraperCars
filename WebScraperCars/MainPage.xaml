@@ -113,21 +113,44 @@
             <controls:Expander x:Name="de" 
                                Margin="10"
                                Header="Filters"
-                               IsExpanded="{Binding IsExpanded1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                               IsExpanded="{Binding IsExpanded1, 
+                                                    UpdateSourceTrigger=PropertyChanged, 
+                                                    Mode=TwoWay}"
                                ExpandDirection="Up">
 
                 <StackPanel>
 
-                    <TextBlock Text="Which Website: "
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Which Website: "
                                    HorizontalAlignment="Center"
                                    FontSize="20"
                                    Margin="10"/>
 
-                    <CheckBox Content="Le Parking"
-                              IsChecked="{Binding IsLeParkingChecked,
+                        <CheckBox Content="Le Parking"
+                                  IsChecked="{Binding IsLeParkingChecked,
                                                   Mode=TwoWay, 
                                                   UpdateSourceTrigger=PropertyChanged}"
-                              FontSize="20"/>
+                                  Margin="10"
+                                  FontSize="20"/>
+
+                        <CheckBox Content="Website 2"
+                                  IsChecked="{Binding IsLeParkingChecked,
+                                                  Mode=TwoWay, 
+                                                  UpdateSourceTrigger=PropertyChanged}"
+                                  Margin="10"
+                                  FontSize="20"/>
+
+                        <CheckBox Content="Website 3"
+                                  IsChecked="{Binding IsLeParkingChecked,
+                                                  Mode=TwoWay, 
+                                                  UpdateSourceTrigger=PropertyChanged}"
+                                  Margin="10"
+                                  FontSize="20"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="10">
+                        <Slider />
+                    </StackPanel>
 
                 </StackPanel>
 
