@@ -18,7 +18,7 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <DataTemplate x:DataType="models:CarModel" x:Key="BookDataTemplate">
+        <DataTemplate x:DataType="models:CarModel" x:Key="CarListDataTemplate">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     
@@ -73,7 +73,7 @@
         <!-- Display the cars -->
         <Grid>
 
-            <TextBlock Visibility="{Binding CarModels.Count,
+            <TextBlock Visibility="{Binding CarModelsItemSource.Count,
                                             Converter={StaticResource ListViewItemVisibilityConverter}}"
                        HorizontalAlignment="Center"
                        Margin="10">
@@ -82,14 +82,14 @@
 
             </TextBlock>
 
-            <ListView x:Name="ContentGridView"
-                      ItemsSource="{Binding CarModels}"
+            <ListView x:Name="ContentListView"
+                      ItemsSource="{Binding CarModelsItemSource}"
                       CanDragItems="False"
                       AllowDrop="False"
                       CanReorderItems="False"
                       SelectionMode="Single"
                       IsItemClickEnabled="True"  
-                      ItemTemplate="{StaticResource BookDataTemplate}"                      
+                      ItemTemplate="{StaticResource CarListDataTemplate}"                      
                       FlowDirection="LeftToRight">
 
                 <ListView.ItemContainerStyle>
