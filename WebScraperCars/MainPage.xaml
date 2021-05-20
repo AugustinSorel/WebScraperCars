@@ -159,14 +159,16 @@
 
                             <TextBox HorizontalAlignment="Center" 
                                      FontSize="20" 
-                                     Text="{Binding RangeMin, ElementName=RangeSlider, Mode=TwoWay}" />
+                                     Text="{Binding RangeMin, 
+                                                    ElementName=RangeSlider, 
+                                                    Mode=TwoWay}" />
 
                             <local:MyRangeSlider x:Name="RangeSlider"
                                                  Grid.Column="1"
-                                                 Maximum="100"
+                                                 Maximum="100000"
                                                  Minimum="0"
-                                                 RangeMax="80"
-                                                 RangeMin="20"
+                                                 RangeMax="{Binding RangeMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 RangeMin="{Binding RangeMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  Width="200"/>
 
                             <TextBox Grid.Column="2"

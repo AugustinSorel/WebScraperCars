@@ -15,7 +15,30 @@ namespace WebScraperCars.ViewModels
         private bool isExpanded1;
         private bool isExpanded2;
 
+        private int rangeMin;
+        private int rangeMax;
+
         #region Properties
+        public int RangeMin
+        {
+            get { return rangeMin; }
+            set 
+            {
+                rangeMin = value; 
+                NotifyPropertyChanged("RangeMin"); 
+            }
+        }
+
+        public int RangeMax
+        {
+            get { return rangeMax; }
+            set 
+            { 
+                rangeMax = value;
+                NotifyPropertyChanged("RangeMax");
+            }
+        }
+
         public bool IsExpanded1
         {
             get { return isExpanded1; }
@@ -72,6 +95,8 @@ namespace WebScraperCars.ViewModels
             IsVisible = Visibility.Collapsed;
             IsExpanded1 = false;
             IsExpanded2 = false;
+            RangeMax = 100000;
+            RangeMin = 0;
             ButtonScrapingCommand = new StartScrapingCommand(StartScraping);
         }
 
@@ -99,7 +124,7 @@ namespace WebScraperCars.ViewModels
 
             if (isLeParkingChecked)
             {
-                LeParkingScraper leParkingScraper = new LeParkingScraper(carName);
+                LeParkingScraper leParkingScraper = new LeParkingScraper(carName, rangeMin, rangeMax);
                 foreach (var item in await leParkingScraper.GetCars())
                     cars.Add(item);
             }

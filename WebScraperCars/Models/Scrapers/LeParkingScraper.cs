@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,9 +14,15 @@ namespace WebScraperCars
         private readonly string url;
         private HtmlNode productListItem;
 
-        public LeParkingScraper(string carName)
+        public int RangeMin { get; }
+        public int RangeMax { get; }
+
+        public LeParkingScraper(string carName, int rangeMin, int rangeMax)
         {
-            url = "https://www.leparking.fr/voiture-occasion/" + carName + ".html";
+            url = "https://www.leparking.fr/voiture-occasion/" + carName + ".html#!/voiture-occasion/" + carName.ToString() + ".html%3Fslider_prix%3D" + rangeMin.ToString() + "%7C" + rangeMax.ToString();
+            RangeMin = rangeMin;
+            RangeMax = rangeMax;
+            //+ rangeMin.ToString() + "%7C" + rangeMax.ToString();
         }
 
         internal async Task<ObservableCollection<CarModel>> GetCars()
@@ -30,7 +37,8 @@ namespace WebScraperCars
             foreach (var productListItem in GetProductLists(productHTML))
             {
                 this.productListItem = productListItem;
-                carModels.Add(new CarModel()
+
+                CarModel carModel = new CarModel()
                 {
                     CarID = GetItemID(),
                     CarCountry = GetCountry(),
@@ -39,10 +47,28 @@ namespace WebScraperCars
                     CarSite = "Le Parking",
                     URL = GetURL(),
                     CarImage = GetImage(),
-                });
+                };
+
+                int priceInt = GetPriceStringToInt(carModel);
+                if (priceInt > RangeMax || priceInt < RangeMin)
+                    continue;
+
+                carModels.Add(carModel);
             }
 
             return carModels;
+        }
+
+        private int GetPriceStringToInt(CarModel carModel)
+        {
+            string priceString = string.Empty;
+            foreach (char item in carModel.CarPrice)
+            {
+                if (char.IsDigit(item))
+                    priceString += item;
+            }
+
+            return int.Parse(priceString);
         }
 
         private string GetURL()
@@ -79,7 +105,8 @@ namespace WebScraperCars
 
         private string GetPrice()
         {
-            return productListItem.Descendants("p").Where(node => node.GetAttributeValue("Class", "").Equals("prix")).FirstOrDefault().InnerText.Trim();
+            var s = productListItem.Descendants("p").Where(node => node.GetAttributeValue("Class", "").Equals("prix")).FirstOrDefault().InnerText.Trim();
+            return s;
         }
 
         private IEnumerable<HtmlNode> GetProductLists(List<HtmlNode> productHTML)
