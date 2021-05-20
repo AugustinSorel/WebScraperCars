@@ -103,8 +103,13 @@ namespace WebScraperCars
 
         private string GetPrice()
         {
-            var s = productListItem.Descendants("p").Where(node => node.GetAttributeValue("Class", "").Equals("prix")).FirstOrDefault().InnerText.Trim();
-            return s;
+            var s = productListItem.Descendants("p").Where(node => node.GetAttributeValue("Class", "").Equals("prix")).FirstOrDefault();
+            if (s == null)
+                return "0";
+            var e = s.InnerText.Trim();
+            if (e == null)
+                return "0";
+            return e;
         }
 
         private IEnumerable<HtmlNode> GetProductLists(List<HtmlNode> productHTML)
