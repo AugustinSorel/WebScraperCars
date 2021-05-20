@@ -1,9 +1,4 @@
-﻿using HtmlAgilityPack;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using WebScraperCars.Models;
 using Windows.UI.Xaml;
 
@@ -17,7 +12,30 @@ namespace WebScraperCars.ViewModels
         private bool isLeParkingChecked;
         private Visibility isVisible;
 
+        private bool isExpanded1;
+        private bool isExpanded2;
+
         #region Properties
+        public bool IsExpanded1
+        {
+            get { return isExpanded1; }
+            set 
+            { 
+                isExpanded1 = value; 
+                NotifyPropertyChanged("IsExpanded1"); 
+            }
+        }
+
+        public bool IsExpanded2
+        {
+            get { return isExpanded2; }
+            set 
+            { 
+                isExpanded2 = value; 
+                NotifyPropertyChanged("IsExpanded2"); 
+            }
+        }
+
         public Visibility IsVisible
         {
             get { return isVisible; }
@@ -52,6 +70,8 @@ namespace WebScraperCars.ViewModels
         public MainPageViewModel()
         {
             IsVisible = Visibility.Collapsed;
+            IsExpanded1 = false;
+            IsExpanded2 = false;
             ButtonScrapingCommand = new StartScrapingCommand(StartScraping);
         }
 
@@ -59,26 +79,6 @@ namespace WebScraperCars.ViewModels
         {
             if (UserSelectedAtLeastOneCheckBox())
                 StartPopulatingTheListView(carName);
-        }
-
-        private async void StartPopulatingTheListView(string carName)
-        {
-            IsVisible = Visibility.Visible;
-
-            ObservableCollection<CarModel> cars = new ObservableCollection<CarModel>();
-
-            if (isLeParkingChecked)
-                foreach (var item in await GetCars(carName))
-                    cars.Add(item);
-
-            if (isLeParkingChecked)
-                foreach (var item in await GetCars("Renault"))
-                    cars.Add(item);
-
-
-            CarModelsItemSource = cars;
-
-            IsVisible = Visibility.Collapsed;
         }
 
         public bool UserSelectedAtLeastOneCheckBox()
@@ -89,75 +89,31 @@ namespace WebScraperCars.ViewModels
             return false;
         }
 
-        #region Le Parking Scraping
-        private async Task<ObservableCollection<CarModel>> GetCars(string v)
+        private async void StartPopulatingTheListView(string carName)
         {
-            var url = "https://www.leparking.fr/voiture-occasion/" + v + ".html";
-            ObservableCollection<CarModel> carModels = new ObservableCollection<CarModel>();
-            var htmlDocument = new HtmlDocument();
+            IsVisible = Visibility.Visible;
+            IsExpanded1 = false;
+            IsExpanded2 = false;
 
-            htmlDocument.LoadHtml(await new HttpClient().GetStringAsync(url));
+            ObservableCollection<CarModel> cars = new ObservableCollection<CarModel>();
 
-            var productHTML = htmlDocument.DocumentNode.Descendants("ul").Where(node => node.GetAttributeValue("class", "").Equals("resultat")).ToList();
-
-            foreach (HtmlNode productListItem in GetProductLists(productHTML))
+            if (isLeParkingChecked)
             {
-                carModels.Add(new CarModel()
-                {
-                    CarID = GetItemID(productListItem),
-                    CarCountry = GetCountry(productListItem),
-                    CarName = GetTitle(productListItem),
-                    CarPrice = GetPrice(productListItem),
-                    CarSite = "Le Parking",
-                    URL = GetURL(productListItem),
-                    CarImage = GetImage(productListItem),
-                });
+                LeParkingScraper leParkingScraper = new LeParkingScraper(carName);
+                foreach (var item in await leParkingScraper.GetCars())
+                    cars.Add(item);
             }
 
-            return carModels;
+            //if (isLeParkingChecked)
+            //{
+            //    LeParkingScraper leParkingScraper = new LeParkingScraper("Renault");
+            //    foreach (var item in await leParkingScraper.GetCars())
+            //        cars.Add(item);
+            //}
+
+            CarModelsItemSource = cars;
+
+            IsVisible = Visibility.Collapsed;
         }
-
-        private string GetURL(HtmlNode productListItem)
-        {
-            string x = productListItem.Descendants("a").Where(node => node.GetAttributeValue("class", "").Equals("external btn-plus no-partenaire-btn")).FirstOrDefault().GetAttributeValue("href", "");
-            string url = "https://www.leparking.fr" + x;
-            return url;
-        }
-
-        private string GetImage(HtmlNode productListItem)
-        {
-            string imageString = productListItem.Descendants("img").FirstOrDefault().GetAttributeValue("src", "").Trim();
-
-            if (imageString.Length < 40)
-                return "Assets/ImageNotAvailable.png";
-
-            return imageString;
-        }
-
-        private string GetItemID(HtmlNode productListItem)
-        {
-            return productListItem.GetAttributeValue("tref", "").Trim();
-        }
-
-        private string GetTitle(HtmlNode productListItem)
-        {
-            return productListItem.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("title-block brand")).FirstOrDefault().InnerText.Trim();
-        }
-
-        private string GetCountry(HtmlNode productListItem)
-        {
-            return productListItem.Descendants("span").Where(node => node.GetAttributeValue("Class", "").Equals("upper")).FirstOrDefault().InnerText.Trim();
-        }
-
-        private string GetPrice(HtmlNode productListItem)
-        {
-            return productListItem.Descendants("p").Where(node => node.GetAttributeValue("Class", "").Equals("prix")).FirstOrDefault().InnerText.Trim();
-        }
-
-        private IEnumerable<HtmlNode> GetProductLists(List<HtmlNode> productHTML)
-        {
-            return productHTML[0].Descendants("li").Where(node => node.GetAttributeValue("class", "").Contains("clearfix")).ToList();
-        }
-        #endregion
     }
 }

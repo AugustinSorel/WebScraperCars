@@ -113,7 +113,7 @@
             <controls:Expander x:Name="de" 
                                Margin="10"
                                Header="Filters"
-                               IsExpanded="False"
+                               IsExpanded="{Binding IsExpanded1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                ExpandDirection="Up">
 
                 <StackPanel>
@@ -137,7 +137,7 @@
             <controls:Expander x:Name="Expander2" 
                                Margin="10"
                                Header="Search Detail"
-                               IsExpanded="False"
+                               IsExpanded="{Binding IsExpanded2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                ExpandDirection="Up">
 
                     <StackPanel>
