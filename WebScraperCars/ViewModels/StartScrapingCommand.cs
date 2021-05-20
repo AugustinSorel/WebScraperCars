@@ -6,9 +6,9 @@ namespace WebScraperCars.ViewModels
     class StartScrapingCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private Action<object> _execute;
+        private Action<string> _execute;
 
-        public StartScrapingCommand(Action<object> execute)
+        public StartScrapingCommand(Action<string> execute)
         {
             _execute = execute;
         }
@@ -23,7 +23,7 @@ namespace WebScraperCars.ViewModels
 
         public void Execute(object parameter)
         {
-            _execute.Invoke(parameter);
+            _execute.Invoke(parameter as string);
         }
     }
 }

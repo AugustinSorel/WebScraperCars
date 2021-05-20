@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace WebScraperCars.ViewModels
                 NotifyPropertyChanged("IsLeParkingChecked");
             }
         }
+
         #endregion
 
         public MainPageViewModel()
@@ -42,10 +44,26 @@ namespace WebScraperCars.ViewModels
             ButtonScrapingCommand = new StartScrapingCommand(StartScraping);
         }
 
-        public async void StartScraping(object carName)
+        public void StartScraping(string carName)
         {
             if (UserSelectedAtLeastOneCheckBox())
-                CarModelsItemSource = await GetCars(carName as string);
+                StartPopulatingTheListView(carName);
+        }
+
+        private async void StartPopulatingTheListView(string carName)
+        {
+            ObservableCollection<CarModel> cars = new ObservableCollection<CarModel>();
+
+            if (isLeParkingChecked)
+                foreach (var item in await GetCars(carName))
+                    cars.Add(item);
+
+            if (isLeParkingChecked)
+                foreach (var item in await GetCars("Renault"))
+                    cars.Add(item);
+
+
+            CarModelsItemSource = cars;
         }
 
         public bool UserSelectedAtLeastOneCheckBox()
@@ -61,7 +79,7 @@ namespace WebScraperCars.ViewModels
         {
             var url = "https://www.leparking.fr/voiture-occasion/" + v + ".html";
             ObservableCollection<CarModel> carModels = new ObservableCollection<CarModel>();
-            var htmlDocument = new HtmlAgilityPack.HtmlDocument();
+            var htmlDocument = new HtmlDocument();
 
             htmlDocument.LoadHtml(await new HttpClient().GetStringAsync(url));
 

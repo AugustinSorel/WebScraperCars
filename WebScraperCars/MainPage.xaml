@@ -108,7 +108,7 @@
             <controls:Expander x:Name="de" 
                                Margin="10"
                                Header="Filters"
-                               IsExpanded="True"
+                               IsExpanded="False"
                                ExpandDirection="Up">
 
                 <StackPanel>
@@ -119,7 +119,7 @@
                                    Margin="10"/>
 
                     <CheckBox Content="Le Parking"
-                              IsChecked="{Binding IsLeParkingChecked, 
+                              IsChecked="{Binding IsLeParkingChecked,
                                                   Mode=TwoWay, 
                                                   UpdateSourceTrigger=PropertyChanged}"
                               FontSize="20"/>
@@ -141,14 +141,14 @@
                                    HorizontalAlignment="Center"
                                    FontSize="20"
                                    Margin="10"/>
-                        
+
                         <TextBox Margin="10"
                                  x:Name="textBoxCarName"
                                  PlaceholderText="Car Name"
                                  TextAlignment="Center"
-                                 FontSize="20"/>
-                        
-                    </StackPanel>
+                                 FontSize="20"
+                                 />
+                </StackPanel>
                 
             </controls:Expander>
         </StackPanel>
