@@ -1,7 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,7 +21,6 @@ namespace WebScraperCars
             url = "https://www.leparking.fr/voiture-occasion/" + carName + ".html#!/voiture-occasion/" + carName.ToString() + ".html%3Fslider_prix%3D" + rangeMin.ToString() + "%7C" + rangeMax.ToString();
             RangeMin = rangeMin;
             RangeMax = rangeMax;
-            //+ rangeMin.ToString() + "%7C" + rangeMax.ToString();
         }
 
         internal async Task<ObservableCollection<CarModel>> GetCars()
