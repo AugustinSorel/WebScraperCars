@@ -60,6 +60,10 @@ namespace WebScraperCars
         private int GetPriceStringToInt(CarModel carModel)
         {
             string priceString = string.Empty;
+
+            if (string.IsNullOrEmpty(carModel.CarPrice) || carModel.CarPrice == "NC")
+                return 0;
+
             foreach (char item in carModel.CarPrice)
             {
                 if (char.IsDigit(item))
