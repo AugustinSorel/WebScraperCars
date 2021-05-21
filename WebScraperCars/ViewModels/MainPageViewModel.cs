@@ -143,8 +143,8 @@ namespace WebScraperCars.ViewModels
 
             if (isEbayChecked)
             {
-                EbayScraper leParkingScraper = new EbayScraper("Renault", rangeMin, rangeMax);
-                foreach (var item in await leParkingScraper.GetCars())
+                EbayScraper ebayScraper = new EbayScraper(carName, rangeMin, rangeMax);
+                foreach (var item in await ebayScraper.GetCars())
                     cars.Add(item);
             }
 
