@@ -132,8 +132,8 @@
                                   Margin="10"
                                   FontSize="20"/>
 
-                        <CheckBox Content="Website 2"
-                                  IsChecked="{Binding IsLeParkingChecked,
+                        <CheckBox Content="Ebay"
+                                  IsChecked="{Binding IsEbayChecked,
                                                   Mode=TwoWay, 
                                                   UpdateSourceTrigger=PropertyChanged}"
                                   Margin="10"

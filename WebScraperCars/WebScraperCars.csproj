@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Scrapers\LeParkingScraper.cs" />
+    <Compile Include="Models\Scrapers\EbayScraper.cs" />
     <Compile Include="ViewModels\StartScrapingCommand.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

@@ -10,6 +10,8 @@ namespace WebScraperCars.ViewModels
         public StartScrapingCommand ButtonScrapingCommand { get; set; }
 
         private bool isLeParkingChecked;
+        private bool isEbayChecked;
+
         private Visibility isVisible;
 
         private bool isExpanded1;
@@ -19,6 +21,16 @@ namespace WebScraperCars.ViewModels
         private int rangeMax;
 
         #region Properties
+        public bool IsEbayChecked
+        {
+            get { return isEbayChecked; }
+            set 
+            { 
+                isEbayChecked = value;
+                NotifyPropertyChanged("IsEbayChecked");
+            }
+        }
+
         public int RangeMin
         {
             get { return rangeMin; }
@@ -108,7 +120,7 @@ namespace WebScraperCars.ViewModels
 
         public bool UserSelectedAtLeastOneCheckBox()
         {
-            if (isLeParkingChecked)
+            if (isLeParkingChecked || isEbayChecked)
                 return true;
 
             return false;
@@ -129,12 +141,12 @@ namespace WebScraperCars.ViewModels
                     cars.Add(item);
             }
 
-            //if (isLeParkingChecked)
-            //{
-            //    LeParkingScraper leParkingScraper = new LeParkingScraper("Renault");
-            //    foreach (var item in await leParkingScraper.GetCars())
-            //        cars.Add(item);
-            //}
+            if (isEbayChecked)
+            {
+                EbayScraper leParkingScraper = new EbayScraper("Renault", rangeMin, rangeMax);
+                foreach (var item in await leParkingScraper.GetCars())
+                    cars.Add(item);
+            }
 
             CarModelsItemSource = cars;
 
