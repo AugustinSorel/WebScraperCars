@@ -15,11 +15,7 @@ namespace WebScraperCars.ViewModels
 
         public EbayScraper(string carName, int rangeMin, int rangeMax)
         {
-            //url = "https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=mgtf&_sacat=0&LH_TitleDesc=0&_udlo=1257&_udhi=2741&_osacat=0&_odkw=" + carName;
             url = "https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=" + carName + "&_sacat=0&LH_TitleDesc=0&_udlo=" + rangeMin.ToString() + "&_udhi=" + rangeMax.ToString() + "&_osacat=0&_odkw=" + carName;
-
-            //url = "https://www.ebay.co.uk/sch/i.html?_from=R40&_fosrp=1&_nkw=" + carName + "&_in_kw=1&_ex_kw=&_sacat=0&_mPrRngCbx=1&_udlo=" + rangeMin.ToString() + "&_udhi=" + rangeMax.ToString() + "&_ftrt=901&_ftrv=1&_sabdlo=&_sabdhi=&_samilow=&_samihi=&_sadis=15&_stpos=&_sargn=-1%26saslc%3D1&_salic=3&_sop=12&_dmd=1&_ipg=200";
-
         }
 
         internal async Task<ObservableCollection<CarModel>> GetCars()

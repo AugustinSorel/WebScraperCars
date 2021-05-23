@@ -139,10 +139,11 @@
                                   Margin="10"
                                   FontSize="20"/>
 
-                        <CheckBox Content="Website 3"
-                                  IsChecked="{Binding IsLeParkingChecked,
-                                                  Mode=TwoWay, 
-                                                  UpdateSourceTrigger=PropertyChanged}"
+                        <CheckBox Content="La Central"
+                                  Margin="10"
+                                  FontSize="20"/>
+
+                        <CheckBox Content="Le Bon Coin"
                                   Margin="10"
                                   FontSize="20"/>
                     </StackPanel>
