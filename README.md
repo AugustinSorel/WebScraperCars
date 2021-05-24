@@ -13,7 +13,7 @@ simple web scraper for cars.
 
 ## Youtube Video
 
-[![Everything Is AWESOME](https://github.com/AugustinSorel/WebScraperCars/blob/master/Images/Capture.PNG)](https://youtu.be/72Lu1k6vhf8)
+[![Everything Is AWESOME](https://github.com/AugustinSorel/WebScraperCars/blob/master/Images/Capture3.PNG)](https://youtu.be/72Lu1k6vhf8)
 
 ## Images
 
