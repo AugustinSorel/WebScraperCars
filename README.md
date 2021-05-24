@@ -18,7 +18,7 @@ simple web scraper for cars.
 ## Images
 
 ### Settings
-![alt text](https://github.com/AugustinSorel/MarchingSquares/blob/master/Images/Capture.PNG)
+![alt text](https://github.com/AugustinSorel/WebScraperCars/blob/master/Images/Capture.PNG)
 
 ### Result
-![alt text](https://github.com/AugustinSorel/MarchingSquares/blob/master/Images/Capture2.PNG)
+![alt text](https://github.com/AugustinSorel/WebScraperCars/blob/master/Images/Capture2.PNG)
